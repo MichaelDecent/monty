@@ -41,60 +41,28 @@ $
 pall This is the end of our program. Monty is awesome!$
 julien@ubuntu:~/monty$
 ~~~
-
-**The monty program**
-
-* Usage: `monty file`
-	* where `file` is the path to the file containing Monty byte code
-* If the user does not give any file or more than one argument to your program, print the error message `USAGE: monty file`, followed by a new line, and exit with the status `EXIT_FAILURE`
-* If, for any reason, it’s not possible to open the file, print the error message `Error: Can't open file <file>`, followed by a new line, and exit with the status `EXIT_FAILURE`
-	* where `<file>` is the name of the file
-* If the file contains an invalid instruction, print the error message `L<line_number>: unknown instruction <opcode>`, followed by a new line, and exit with the status `EXIT_FAILURE`
-	* where is the line number where the instruction appears.
-	* Line numbers always start at 1
-* The monty program runs the bytecodes line by line and stop if either:
-	* it executed properly every line of the file
- 	* it finds an error in the file
-	* an error occured
-* If you can’t malloc anymore, print the error message `Error`: `malloc failed`, followed by a new line, and exit with status `EXIT_FAILURE`.
-* You have to use `malloc` and `free` and are not allowed to use any other function from `man malloc` (realloc, calloc, …)
+## Allowable opcodes and what they do
 
 
-## Data Structures ##
-Please use the following data structures for this project. Don’t forget to include them in your header file.
-
-~~~
-/**
- * struct stack_s - doubly linked list representation of a stack (or queue)
- * @n: integer
- * @prev: points to the previous element of the stack (or queue)
- * @next: points to the next element of the stack (or queue)
- *
- * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO
- */
-typedef struct stack_s
-{
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
-} stack_t;
-~~~
-~~~
-/**
- * struct instruction_s - opcode and its function
- * @opcode: the opcode
- * @f: function to handle the opcode
- *
- * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
- */
-typedef struct instruction_s
-{
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
-~~~
-
+|opcode  |  functionality|
+| --- | --- |
+| push | add element to the 'top' of stack and 'end' of queue  |
+| pop  | remove element from 'top' of stack and 'end' of queue |
+|pall  |print every member of the structure|
+| pint | prints the member value at the top of stack |
+| swap | swaps the order  of the 1st and 2nd elements in stack |
+| add | add top two member values |
+| sub | subtract the top element from the 2nd top element |
+| div | divide the 2nd element by the top element |
+| mul | multiply the top two elements of the stack |
+| mod | the remainder when the 2nd element is divided by the top element |
+| comment | there is the ability to parse comments found in bytecode ->'#'|
+| pchar | print character at the top of the stack |
+| pstr | print the character at the top of the stack|
+| rotl | moves element at the top to the bottom of the stack |
+| rotr | the bottom of the stack becomes the top |
+| queue, stack | toggles the doubly link list implementation style |
+| nop | opcode should do nothing |
 
 ## Compilation & Output ##
 * Your code will be compiled this way:
@@ -102,11 +70,6 @@ typedef struct instruction_s
 ~~~
 $ gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
 ~~~
-
-* Any output must be printed on `stdout`
-* Any error message must be printed on `stderr`
-	* [Here is a link to a GitHub repository](https://github.com/sickill/stderred) that could help you making sure your errors are printed on `stderr`
-
 
 ## Authors ##
 * Michael NWOGHA - [github](https://github.com/michaeldecent)
