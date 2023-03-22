@@ -72,4 +72,4 @@ $ gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
 ~~~
 
 ## Authors ##
-* Michael NWOGHA - [github](https://github.com/michaeldecent)
+* Michael NWOGHA - [github](https://github.com/michaeldecent) || [linkedin](https://www.linkedin.com/in/michael-nwogha-2b3b8a246)
