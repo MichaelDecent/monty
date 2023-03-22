@@ -1,6 +1,6 @@
 #include "monty.h"
 
-int handle_opcode(char *opcode, int line_number, stack_t *stack)
+int handle_opcode(char *opcode, int line_number, stack_t **stack)
 {
 	int i;
 
@@ -9,12 +9,12 @@ int handle_opcode(char *opcode, int line_number, stack_t *stack)
 		{"pall", print_all},
 		{NULL, NULL} 
 	};
-	
+	i = 0;	
 	while (ops_array[i].opcode != NULL)
 	{
 		if(strcmp(opcode, ops_array[i].opcode) == 0)
 		{
-			ops_array[i].f(&stack, line_number);
+			ops_array[i].f(stack, line_number);
 			return (1);
 		}
 		i++;

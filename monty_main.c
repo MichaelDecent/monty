@@ -35,11 +35,11 @@ int main(int ac, char**av)
 
 	while ((nread = getline(&line_content, &n, file)) != -1)
 	{
-		opcode = strtok(line_content, " \t");
-		oparg = strtok(NULL, " \t");
+		opcode = strtok(line_content, " \n\t");
+		oparg = strtok(NULL, " \n\t");
 		if (opcode)
 		{
-			if (handle_opcode(opcode, line_number, stack) == -1)
+			if (handle_opcode(opcode, line_number, &stack) == -1)
 			{
 				fprintf(stderr, "L%d: unknown instruction %s", line_number, opcode);
 				exit(EXIT_FAILURE);
