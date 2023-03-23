@@ -36,10 +36,15 @@ int main(int ac, char**av)
 	}
 	while (nread > 0)
 	{
+<<<<<<< HEAD
 		nread = getline(&line_content, &n, file)
 		bus.content = line_content;
 		line_number++;
 		if (nread > 0)
+=======
+		/*printf("line_content => %s", line_content);*/
+		if (line_content)
+>>>>>>> 019a7f6b4bcb8d7228ddf9b2fc036c3271587e35
 		{
 			handle_opcode(line_content, &stack, counter, file);
 		}

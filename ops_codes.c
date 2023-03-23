@@ -10,6 +10,19 @@ void push_int(stack_t **top, unsigned int line_number)
 	int i, m = 0, flag = 0;
 
 	if (bus.oparg)
+
+	if (oparg == NULL && atoi(oparg) == 0)
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		free(line_content);
+		free(*top);
+		exit(EXIT_FAILURE);
+	}
+	
+	n = atoi(oparg);
+	new = malloc(sizeof(stack_t));
+	if (new == NULL)
+
 	{
 		if (bus.oparg[0] == '-')
 			m++;
