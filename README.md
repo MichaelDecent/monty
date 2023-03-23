@@ -80,12 +80,12 @@ $ gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
 add_node - adds a new node to the stack
 
 ### add_queue.c ###
-f_queue - function that prints the top of the queue
+f_queue - function that prints the top of the queue <br />
 addqueue - function that adds a node to the tail of the queue 
 
 ### handle_opscode.c ###
 execute - executes the opcode
 
 ### mem_mgt.c ###
-free_stack - frees the stack
+free_stack - frees the stack <br />
 f_stack - function that prints the top of the stack
