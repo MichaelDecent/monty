@@ -11,7 +11,7 @@ void push_int(stack_t **top, unsigned int line_number)
 	stack_t *temp;
 	int n;
 
-	if (oparg == NULL || atoi(oparg) == 0)
+	if (oparg == NULL && atoi(oparg) == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free(line_content);

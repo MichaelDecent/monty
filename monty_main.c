@@ -33,7 +33,7 @@ int main(int ac, char**av)
 
 	while ((getline(&line_content, &n, file)) != -1)
 	{
-		printf("line_content => %s", line_content);
+		/*printf("line_content => %s", line_content);*/
 		if (line_content)
 		{
 			opcode = strtok(line_content, " \n\t");
