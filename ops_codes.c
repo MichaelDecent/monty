@@ -5,24 +5,11 @@
  * @line_number: the line number where the opcode is found
  *
  */
-void push_int(stack_t **top, unsigned int line_number)
+void f_push(stack_t **top, unsigned int line_number)
 {
 	int i, m = 0, flag = 0;
 
 	if (bus.oparg)
-
-	if (oparg == NULL && atoi(oparg) == 0)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		free(line_content);
-		free(*top);
-		exit(EXIT_FAILURE);
-	}
-	
-	n = atoi(oparg);
-	new = malloc(sizeof(stack_t));
-	if (new == NULL)
-
 	{
 		if (bus.oparg[0] == '-')
 			m++;
@@ -32,33 +19,33 @@ void push_int(stack_t **top, unsigned int line_number)
 				flag = 1; 
 		}
 		if (flag == 1)
-		{ fprintf(stderr, "L%d: usage: push integer\n", counter);
+		{ fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			fclose(bus.file);
 			free(bus.content);
-			free_stack(*head);
+			free_stack(*top);
 			exit(EXIT_FAILURE); 
 		}
 	}
 	else
 	{ 
-		fprintf(stderr, "L%d: usage: push integer\n", counter);
+		fprintf(stderr, "L%d: usage: push integer\n",line_number);
 		fclose(bus.file);
 		free(bus.content);
-		free_stack(*head);
+		free_stack(*top);
 		exit(EXIT_FAILURE); 
 	}
 	i = atoi(bus.oparg);
 	if (bus.lifi == 0)
-		addnode(head, i);
+		addnode(top, i);
 	else
-		addqueue(head, i);
+		addqueue(top, i);
 }
 /**
  * print_all - An opcode that prints all the elements in the file
  * @stack: a pointer to the head of the stack
  * @line_number: the line number where the opcode is found
  */
-void print_all(stack_t **top, unsigned int line_number)
+void f_pall(stack_t **top, unsigned int line_number)
 {
 	stack_t *temp;
 	(void)line_number;

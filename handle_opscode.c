@@ -7,20 +7,20 @@
  *
  * Return: 0 if successful and 1 if failed
  */
-int handle_opcode(char *line_content, stack_t **stack, unsigned int line_number)
+int handle_opcode(char *line_content, stack_t **stack, unsigned int line_number, FILE *file)
 {
 	unsigned int i = 0;
 	char *opcode;
 
 	instruction_t ops_array[] = {
-		{"push", push_int},
-		{"pall", print_all},
+		{"push", f_push},
+		{"pall", f_pall},
 		{NULL, NULL} 
 	};
-	opcode = strtok(content, " \n\t");
-	if (op && op[0] == '#')
+	opcode = strtok(line_content, " \n\t");
+	if (opcode && opcode[0] == '#')
 		return (0);
-	bus.arg = strtok(NULL, " \n\t");
+	bus.oparg = strtok(NULL, " \n\t");
 	while (ops_array[i].opcode && opcode)
 	{
 		if(strcmp(opcode, ops_array[i].opcode) == 0)
@@ -32,9 +32,9 @@ int handle_opcode(char *line_content, stack_t **stack, unsigned int line_number)
 	}
 	if (opcode && ops_array[i].opcode == NULL)
 	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", counter, op);
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 		fclose(file);
-		free(content);
+		free(line_content);
 		free_stack(*stack);
 		exit(EXIT_FAILURE); 
 	}
