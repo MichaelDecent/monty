@@ -42,10 +42,16 @@ int main(int ac, char**av)
 			if (handle_opcode(opcode, line_number, &stack) == -1)
 			{
 				fprintf(stderr, "L%d: unknown instruction %s", line_number, opcode);
+				fclose(file);
+				free(line_content);
+				free(stack);
 				exit(EXIT_FAILURE);
 			}
+			free(line_content);
 		}
 		line_number++;
 	}
+	free_stack(stack);
+	fclose(file);
 	return (0);
 }

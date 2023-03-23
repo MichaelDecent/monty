@@ -10,7 +10,7 @@ int handle_opcode(char *opcode, int line_number, stack_t **stack)
 		{NULL, NULL} 
 	};
 	i = 0;	
-	while (ops_array[i].opcode != NULL)
+	while (ops_array[i].opcode && opcode)
 	{
 		if(strcmp(opcode, ops_array[i].opcode) == 0)
 		{

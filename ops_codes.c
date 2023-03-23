@@ -38,7 +38,11 @@ void push_int(stack_t **top, unsigned int line_number)
 		temp->prev = new;
 	}
 }
-
+/**
+ * print_all - An opcode that prints all the elements in the file
+ * @stack: a pointer to the head of the stack
+ * @line_number: the line number where the opcode is found
+ */
 void print_all(stack_t **top, unsigned int line_number)
 {
 	stack_t *temp;
