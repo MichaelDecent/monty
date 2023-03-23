@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+bus_t bus = {NULL, NULL, NULL, 0};
+
 /**
  * main - interprete the monty byte codes in a file
  * @ac: number of arguments
@@ -18,6 +20,8 @@ int main(int ac, char**av)
 	size_t n = 0;
 	char *opcode;
 	int line_number = 1;
+	ssize_t nread = 1;
+	char* line_content = NULL;
 	
 	if (ac != 2)
 	{
@@ -30,26 +34,17 @@ int main(int ac, char**av)
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
-
-	while ((getline(&line_content, &n, file)) != -1)
+	while (nread > 0)
 	{
-		printf("line_content => %s", line_content);
-		if (line_content)
-		{
-			opcode = strtok(line_content, " \n\t");
-			oparg = strtok(NULL, " \n\t");
-			if (handle_opcode(opcode, line_number, &stack) == -1)
-			{
-				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-				fclose(file);
-				free(line_content);
-				free(stack);
-				exit(EXIT_FAILURE);
-			}
-		}
+		nread = getline(&line_content, &n, file)
+		bus.content = line_content;
 		line_number++;
+		if (nread > 0)
+		{
+			handle_opcode(line_content, &stack, counter, file);
+		}
+		free(content);
 	}
-	free(line_content);
 	free_stack(stack);
 	fclose(file);
 	return (0);

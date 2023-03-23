@@ -7,40 +7,38 @@
  */
 void push_int(stack_t **top, unsigned int line_number)
 {
-	stack_t *new;
-	stack_t *temp;
-	int n;
+	int i, m = 0, flag = 0;
 
-	if (oparg == NULL || atoi(oparg) == 0)
+	if (bus.oparg)
 	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		free(line_content);
-		free(*top);
-		exit(EXIT_FAILURE);
+		if (bus.oparg[0] == '-')
+			m++;
+		for (; bus.oparg[m] != '\0'; m++)
+		{
+			if (bus.oparg[m] > 57 || bus.oparg[m] < 48)
+				flag = 1; 
+		}
+		if (flag == 1)
+		{ fprintf(stderr, "L%d: usage: push integer\n", counter);
+			fclose(bus.file);
+			free(bus.content);
+			free_stack(*head);
+			exit(EXIT_FAILURE); 
+		}
 	}
-	
-	n = atoi(oparg);
-	new = malloc(sizeof(stack_t));
-	if (new == NULL)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		free(line_content);
-		free(*top);
-		exit(EXIT_FAILURE);
-	}
-	new->n = n;
-	new->next = NULL;
-	new->prev = NULL;
-
-	if (*top == NULL)
-		*top = new;
 	else
-	{
-		temp = *top;
-		*top = new;
-		new->next = temp;
-		temp->prev = new;
+	{ 
+		fprintf(stderr, "L%d: usage: push integer\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE); 
 	}
+	i = atoi(bus.oparg);
+	if (bus.lifi == 0)
+		addnode(head, i);
+	else
+		addqueue(head, i);
 }
 /**
  * print_all - An opcode that prints all the elements in the file

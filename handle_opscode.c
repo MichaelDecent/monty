@@ -5,18 +5,22 @@
  * @line_number: the line number where the opcode is found
  * @stack: a pointer to the stack
  *
- * Return: 0 if successful and -1 if failed
+ * Return: 0 if successful and 1 if failed
  */
-int handle_opcode(char *opcode, int line_number, stack_t **stack)
+int handle_opcode(char *line_content, stack_t **stack, unsigned int line_number)
 {
-	int i;
+	unsigned int i = 0;
+	char *opcode;
 
 	instruction_t ops_array[] = {
 		{"push", push_int},
 		{"pall", print_all},
 		{NULL, NULL} 
 	};
-	i = 0;	
+	opcode = strtok(content, " \n\t");
+	if (op && op[0] == '#')
+		return (0);
+	bus.arg = strtok(NULL, " \n\t");
 	while (ops_array[i].opcode && opcode)
 	{
 		if(strcmp(opcode, ops_array[i].opcode) == 0)
@@ -27,6 +31,12 @@ int handle_opcode(char *opcode, int line_number, stack_t **stack)
 		i++;
 	}
 	if (opcode && ops_array[i].opcode == NULL)
-		return (-1);
-	return (-1);
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", counter, op);
+		fclose(file);
+		free(content);
+		free_stack(*stack);
+		exit(EXIT_FAILURE); 
+	}
+	return (1);
 }
