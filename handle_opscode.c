@@ -19,5 +19,7 @@ int handle_opcode(char *opcode, int line_number, stack_t **stack)
 		}
 		i++;
 	}
+	if (ops_array[i].opcode && opcode == NULL)
+		return (-1);
 	return (-1);
 }
