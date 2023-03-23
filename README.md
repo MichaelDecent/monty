@@ -73,3 +73,19 @@ $ gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
 
 ## Authors ##
 * Michael NWOGHA - [github](https://github.com/michaeldecent) || [linkedin](https://www.linkedin.com/in/michael-nwogha-2b3b8a246)
+* Wonderful ADEYEMO - [github](https://github.com/Dev-wonderful) || [linkedin](https://www.linkedin.com/in/wonderful-adeyemo-4789121a3)
+
+## Files and Functions ##
+### add_node.c ###
+add_node - adds a new node to the stack
+
+### add_queue.c ###
+f_queue - function that prints the top of the queue
+addqueue - function that adds a node to the tail of the queue 
+
+### handle_opscode.c ###
+execute - executes the opcode
+
+### mem_mgt.c ###
+free_stack - frees the stack
+f_stack - function that prints the top of the stack

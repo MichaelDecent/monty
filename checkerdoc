@@ -1,0 +1,44 @@
+
+========== add_node.c ==========
+addnode
+
+========== add_queue.c ==========
+f_queue
+addqueue
+
+========== handle_opscode.c ==========
+execute
+
+========== mem_mgt.c ==========
+free_stack
+f_stack
+
+========== monty_main.c ==========
+main
+
+========== monty_opcodes2.c ==========
+f_pop
+f_pint
+f_nop
+
+========== monty_opcodes.c ==========
+f_add
+f_sub
+f_mul
+f_div
+f_mod
+
+========== monty_pstring.c ==========
+f_pstr
+f_pchar
+
+========== monty_rotate.c ==========
+f_rotl
+f_rotr
+
+========== ops_codes2.c ==========
+f_pall
+f_swap
+
+========== ops_codes.c ==========
+f_push
