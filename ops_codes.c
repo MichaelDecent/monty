@@ -52,11 +52,11 @@ void print_all(stack_t **top, unsigned int line_number)
 	stack_t *temp;
 	(void)line_number;
 
-	if (*top == NULL)
+	temp = *top;
+	if (temp == NULL)
 		return;
 	else
 	{
-		temp = *top;
 		while(temp != NULL)
 		{
 			printf("%d\n", temp->n);

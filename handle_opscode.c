@@ -1,5 +1,12 @@
 #include "monty.h"
-
+/**
+ * handle_opcode - It executes the opcodes in the file
+ * @opcode: the opcode read
+ * @line_number: the line number where the opcode is found
+ * @stack: a pointer to the stack
+ *
+ * Return: 0 if successful and -1 if failed
+ */
 int handle_opcode(char *opcode, int line_number, stack_t **stack)
 {
 	int i;

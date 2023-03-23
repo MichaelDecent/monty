@@ -49,6 +49,7 @@ int main(int ac, char**av)
 		}
 		line_number++;
 	}
+	free(line_content);
 	free_stack(stack);
 	fclose(file);
 	return (0);
