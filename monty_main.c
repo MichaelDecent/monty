@@ -1,48 +1,45 @@
 #define _GNU_SOURCE
 #include "monty.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 bus_t bus = {NULL, NULL, NULL, 0};
-
 /**
- * main - interprete the monty byte codes in a file
- * @ac: number of arguments
- * @av: an array of agruments
- *
- * Return: 1 always;
- */
-int main(int ac, char**av)
+* main - monty code interpreter
+* @argc: number of arguments
+* @argv: monty file location
+* Return: 0 on success
+*/
+int main(int argc, char *argv[])
 {
+	char *content;
 	FILE *file;
+	size_t size = 0;
+	ssize_t read_line = 1;
 	stack_t *stack = NULL;
-	size_t n = 0;
-	unsigned int line_number = 1;
-	ssize_t nread = 1;
-	char* line_content = NULL;
-	
-	if (ac != 2)
+	unsigned int counter = 0;
+
+	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	file = fopen(av[1], "r");
+	file = fopen(argv[1], "r");
 	bus.file = file;
-	if (file == NULL)
+	if (!file)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while (nread > 0)
+	while (read_line > 0)
 	{
-		nread = getline(&line_content, &n, file);
-		bus.content = line_content;
-		line_number++;
-		if (nread > 0)
+		content = NULL;
+		read_line = getline(&content, &size, file);
+		bus.content = content;
+		counter++;
+		if (read_line > 0)
 		{
-			handle_opcode(line_content, &stack, line_number, file);
+			execute(content, &stack, counter, file);
 		}
-		free(line_content);
+		free(content);
 	}
 	free_stack(stack);
 	fclose(file);
