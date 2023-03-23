@@ -15,11 +15,9 @@ int main(int ac, char**av)
 {
 	FILE *file;
 	stack_t *stack = NULL;
-	char *line_content = NULL;
 	size_t n = 0;
 	char *opcode;
 	int line_number = 1;
-	int nread;
 	
 	if (ac != 2)
 	{
@@ -33,21 +31,17 @@ int main(int ac, char**av)
 		exit(EXIT_FAILURE);
 	}
 
-	while ((nread = getline(&line_content, &n, file)) != -1)
+	while ((getline(&line_content, &n, file)) != -1)
 	{
 		opcode = strtok(line_content, " \n\t");
 		oparg = strtok(NULL, " \n\t");
-		if (opcode)
+		if (handle_opcode(opcode, line_number, &stack) == -1)
 		{
-			if (handle_opcode(opcode, line_number, &stack) == -1)
-			{
-				fprintf(stderr, "L%d: unknown instruction %s", line_number, opcode);
-				fclose(file);
-				free(line_content);
-				free(stack);
-				exit(EXIT_FAILURE);
-			}
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+			fclose(file);
 			free(line_content);
+			free(stack);
+			exit(EXIT_FAILURE);
 		}
 		line_number++;
 	}

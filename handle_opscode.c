@@ -15,7 +15,7 @@ int handle_opcode(char *opcode, int line_number, stack_t **stack)
 		if(strcmp(opcode, ops_array[i].opcode) == 0)
 		{
 			ops_array[i].f(stack, line_number);
-			return (1);
+			return (0);
 		}
 		i++;
 	}

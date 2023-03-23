@@ -14,6 +14,8 @@ void push_int(stack_t **top, unsigned int line_number)
 	if (oparg == NULL || atoi(oparg) == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		free(line_content);
+		free(*top);
 		exit(EXIT_FAILURE);
 	}
 	
@@ -22,6 +24,8 @@ void push_int(stack_t **top, unsigned int line_number)
 	if (new == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		free(line_content);
+		free(*top);
 		exit(EXIT_FAILURE);
 	}
 	new->n = n;
